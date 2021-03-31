@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import i18n from '../config/translation'
 
 const Home = () => {
     return (
         <div>
-            <h3>{i18n.t('home')}</h3>
+            <h3>Home</h3>
             <StyledLign>
                 <Link to="/login">Login</Link>
             </StyledLign>
