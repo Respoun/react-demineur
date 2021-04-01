@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import styled from 'styled-components'
 import GameCell from './cell';
 
 class GameBoard extends Component {
@@ -60,11 +60,13 @@ class GameBoard extends Component {
     });
 
     return (
-      <table className="game-board">
-        <tbody>
-          {rows}
-        </tbody>
-      </table>
+      <GameTable>
+        <table>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </GameTable>
     );
   }
 }
@@ -75,5 +77,9 @@ GameBoard.propTypes = {
   onOpenCell: PropTypes.func.isRequired,
   onFlagCell: PropTypes.func.isRequired,
 };
+
+const GameTable = styled.div`
+  border-collapse: collapse;
+`
 
 export default GameBoard;

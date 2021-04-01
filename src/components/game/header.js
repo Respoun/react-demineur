@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Emojify from 'react-emojione';
 import moment from 'moment';
+import styled from 'styled-components'
 
 class GameHeader extends Component {
   constructor(props) {
@@ -42,28 +43,28 @@ class GameHeader extends Component {
 
   render() {
     return (
-      <div className="game-header">
-        <div className="game-flags-left">
+    <GameHead>
+        <GameFlag>
           <Emojify style={{ top: 0 }}>
             🚩
           </Emojify>
           {this.props.bombsLeft}
-        </div>
-        <div className="game-smiley">
+        </GameFlag>
+        <GameSmiley>
           <button onClick={this.onSmileyClick}>
             {this.props.gameStatus === 'GAME_OVER' ? <Emojify style={{ top: 0 }}>😵</Emojify> : ''}
             {this.props.gameStatus === 'GAME_WON' ? <Emojify style={{ top: 0 }}>😎</Emojify> : ''}
             {this.props.gameStatus === 'NOT_STARTED' ? <Emojify style={{ top: 0 }}>😐</Emojify> : ''}
             {this.props.gameStatus === 'STARTED' ? <Emojify style={{ top: 0 }}>🙂</Emojify> : ''}
           </button>
-        </div>
-        <div className="game-time">
+        </GameSmiley>
+        <GameTime>
           {Math.min(parseInt(this.state.timeElasped / 1000 , 10) , 999)}
           <Emojify style={{ top: 0 }}>
             ⌛
           </Emojify>
-        </div>
-      </div>
+        </GameTime>
+      </GameHead>
     );
   }
 }
@@ -74,5 +75,24 @@ GameHeader.propTypes = {
   startTime: PropTypes.object,
   gameStatus: PropTypes.string.isRequired,
 };
+
+const GameHead = styled.div`
+  display: flex;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+const GameFlag = styled.div`
+  justify-content: flex-start;
+`
+const GameSmiley = styled.div`
+  justify-content: center;
+`
+const GameTime = styled.div`
+  justify-content: flex-end;
+`
 
 export default GameHeader;
