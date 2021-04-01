@@ -12,9 +12,6 @@ const Home = () => {
             <StyledLign>
                 <Link to="/deminor">Jouer</Link>
             </StyledLign>
-            <StyledLign>
-                <Link to="/score">Score</Link>
-            </StyledLign>
         </div>
     )
 }
