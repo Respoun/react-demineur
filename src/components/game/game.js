@@ -1,26 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
 import GameBoard from './board';
 import GameHeader from './header';
 
-class Game extends Component {
-  constructor(props) {
-    super(props);
+const Game = (props) => {
+  const [difficulty, setDifficulty] = useState('easy');
 
-    this.state = {
-      difficulty: 'easy',
-    };
-
-    this.onCreateGame = this.onCreateGame.bind(this);
-    this.onDifficultyOptionChange = this.onDifficultyOptionChange.bind(this);
-  }
-
-  componentDidMount() {
-    this.onCreateGame(this.state.difficulty);
-  }
-
-  onCreateGame() {
+  const onCreateGame = e => {
     switch (this.state.difficulty) {
       case 'easy':
         this.props.createGame(9, 9, 10);
@@ -35,40 +21,41 @@ class Game extends Component {
         this.props.createGame(9, 9, 10);
         break;
     }
-  }
+  };
 
-  onDifficultyOptionChange(e) {
-    this.setState({ difficulty: e.target.value }, () => {
-      this.onCreateGame();
-    });
-  }
+  useEffect(() => {
+    this.onCreateGame(this.state.difficulty);
+  });
 
-  render() {
+  const onDifficultyOptionChange = e => {
+    setDifficulty(e.target.value);
+    this.onCreateGame();
+  };
+
     return (
       <div className="Game">
         <div className="game-wrapper">
           <div className="game-options">
-            <select value={this.state.difficulty} onChange={this.onDifficultyOptionChange}>
+            <select value={difficulty} onChange={onDifficultyOptionChange}>
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
               <option value="hard">Hard</option>
             </select>
           </div>
           <GameHeader
-            bombsLeft={this.props.bombsLeft}
-            startTime={this.props.startTime}
-            gameStatus={this.props.status}
-            onCreateGame={this.onCreateGame} />
+            bombsLeft={props.bombsLeft}
+            startTime={props.startTime}
+            gameStatus={props.status}
+            onCreateGame={onCreateGame} />
           <GameBoard
-            gameStatus={this.props.status}
-            board={this.props.board}
-            onOpenCell={this.props.openCell}
-            onFlagCell={this.props.flagCell} />
+            gameStatus={props.status}
+            board={props.board}
+            onOpenCell={props.openCell}
+            onFlagCell={props.flagCell} />
         </div>
       </div>
     );
   }
-}
 
 Game.defaultProps = {
   startTime: null,

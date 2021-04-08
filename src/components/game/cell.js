@@ -1,50 +1,40 @@
-import React, { Component } from 'react';
+import React, {  } from 'react';
 import PropTypes from 'prop-types';
-
 import { FaFlag, FaBomb } from 'react-icons/fa';
 
-class GameCell extends Component {
-  constructor(props) {
-    super(props);
+const GameCell = (props) => {
 
-    this.onCellClick = this.onCellClick.bind(this);
-    this.onCellFlag = this.onCellFlag.bind(this);
-  }
-
-  onCellFlag(e) {
+  const onCellFlag = (e) => {
     e.preventDefault();
-
-    this.props.onFlagCell(this.props.cell);
+    this.props.onFlagCell(props.cell);
   }
 
-  onCellClick(e) {
+  const onCellClick = (e) => {
     e.preventDefault();
-
-    this.props.onOpenCell(this.props.cell);
+    this.props.onOpenCell(props.cell);
   }
 
-  render() {
-    if (this.props.cell.isOpen) {
-      let cellContent = this.props.cell.value;
-      if (cellContent === 0) {
-        cellContent = '';
-      } else if (cellContent === -1) {
-        cellContent = <FaBomb />;
-      }
-      return (
-        <td className="game-cell game-cell-open">
-          <div className={`game-number-${this.props.cell.value}`}>
-            {cellContent}
-          </div>
-        </td>
-      );
+  if (props.cell.isOpen) {
+    let cellContent = props.cell.value;
+    if (cellContent === 0) {
+      cellContent = '';
+    } else if (cellContent === -1) {
+      cellContent = <FaBomb />;
     }
-
+    return (
+      <td className="game-cell game-cell-open">
+        <div className={`game-number-${props.cell.value}`}>
+          {cellContent}
+        </div>
+      </td>
+    );
+  }
+  else {
     return (
       <td className="game-cell">
         <div>
-          <button onClick={this.onCellClick} onContextMenu={this.onCellFlag}>
-            {this.props.cell.isFlagged ? <FaFlag /> : ''}
+          <button onClick={onCellClick} onContextMenu={onCellFlag}>
+            {props.cell.isFlagged ? <FaFlag /> : ''}
           </button>
         </div>
       </td>

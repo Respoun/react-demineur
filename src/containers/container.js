@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-
 import { createGame, openCell, flagCell } from '../redux/actions';
 import Game from './../components/game/game';
 

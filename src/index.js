@@ -6,15 +6,11 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-
-// import './index.css';
-import AppContainer from './containers/container';
 import rootReducer from './redux/reducers';
 
 const store = createStore(
   rootReducer
 );
-
 
 ReactDOM.render(
   <React.StrictMode>

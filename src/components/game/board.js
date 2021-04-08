@@ -1,44 +1,37 @@
-import React, { Component } from 'react';
+import React, {  } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import GameCell from './cell';
 
-class GameBoard extends Component {
-  constructor(props) {
-    super(props);
+const GameBoard = (props) => {
 
-    this.onOpenCell = this.onOpenCell.bind(this);
-    this.onFlagCell = this.onFlagCell.bind(this);
-  }
-
-  onOpenCell(cell) {
-    if (this.props.gameStatus === 'GAME_OVER' || this.props.gameStatus === 'GAME_WON') {
+  const onOpenCell = (cell) => {
+    cell.preventDefault();
+    if (props.gameStatus === 'GAME_OVER' || props.gameStatus === 'GAME_WON') {
       return;
     }
-
-    this.props.onOpenCell(cell);
+    props.onOpenCell(cell);
   }
 
-  onFlagCell(cell) {
-    if (this.props.gameStatus === 'GAME_OVER' || this.props.gameStatus === 'GAME_WON') {
+  const onFlagCell = (cell) => {
+    cell.preventDefault();
+    if (props.gameStatus === 'GAME_OVER' || props.gameStatus === 'GAME_WON') {
       return;
     }
-
-    this.props.onFlagCell(cell);
+    props.onFlagCell(cell);
   }
 
-  render() {
-    const rows = this.props.board.map((row, rowIndex) => {
+    const rows = props.board.map((row, rowIndex) => {
       return (
         <tr key={rowIndex}>
           {
             row.map((cell, cellIndex) => {
               const processedCell = Object.assign({}, cell);
-              if (this.props.gameStatus === 'GAME_OVER') {
+              if (props.gameStatus === 'GAME_OVER') {
                 if (processedCell.value === -1) {
                   processedCell.isOpen = true;
                 }
-              } else if (this.props.gameStatus === 'GAME_WON') {
+              } else if (props.gameStatus === 'GAME_WON') {
                 if (processedCell.value === -1) {
                   processedCell.isFlagged = true;
                 } else {
@@ -49,8 +42,8 @@ class GameBoard extends Component {
                 <GameCell
                   key={cellIndex}
                   cell={processedCell}
-                  onOpenCell={this.onOpenCell}
-                  onFlagCell={this.onFlagCell}
+                  onOpenCell={onOpenCell}
+                  onFlagCell={onFlagCell}
                 />
               );
             })
@@ -69,7 +62,6 @@ class GameBoard extends Component {
       </GameTable>
     );
   }
-}
 
 GameBoard.propTypes = {
   board: PropTypes.array.isRequired,
