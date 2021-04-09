@@ -1,10 +1,10 @@
 import React from 'react'
-import AppContainer from '../../containers/container';
+import Game from './../game/App/index';
 
 const Deminor = () => {
     return (
         <div>
-            <AppContainer />
+            <Game />
         </div>
     )
 }

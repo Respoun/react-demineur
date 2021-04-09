@@ -15,7 +15,6 @@ function App() {
   );
 }
 
-
 const General = styled.div`
   margin: 0;
   padding: 0;
@@ -24,6 +23,5 @@ const General = styled.div`
   justify-content: center;
   font-family: 'Press Start 2P', cursive;
 `
-
 
 export default App;
