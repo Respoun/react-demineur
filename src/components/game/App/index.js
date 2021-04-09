@@ -110,7 +110,6 @@ const Game = () => {
     let cell = gameCells[rowParam][colParam];
 
     if (!isLive) {
-      // if the click place has a bomb, reshuffle the board
       if (cell.value === -1) {
         let hasABomb = true;
         let newCells = gameCells;
@@ -128,12 +127,10 @@ const Game = () => {
       setIsLive(true);
     }
 
-    // only do something if state is zero
     if (cell.state !== 0) {
       return;
     }
 
-    // if bomb, game over.
     if (cell.value === -1) {
       setHasLost(true);
       let newCells = setCellProp(gameCells, rowParam, colParam, "red", true);
@@ -142,15 +139,14 @@ const Game = () => {
       return;
     }
 
-    // if nothing, spread
     if (cell.value === 0) {
       gameCells = openMultiple(gameCells, rowParam, colParam);
     }
-    // display number
+
     if (cell.value > 0) {
       gameCells = setCellProp(gameCells, rowParam, colParam, "state", 1);
     }
-    // if all non-bomb spaces have been pressed, then won
+
     const availableNonBombSpaces = gameCells.reduce(
       (acc, row) =>
         acc +
@@ -181,12 +177,12 @@ const Game = () => {
 
     const cell = cells[rowParam][colParam];
 
-    // if already visible, don't do anything
+
     if (cell.state === 1) {
       return;
     }
 
-    // if not flagged, flag it
+
     if (cell.state === 0) {
       let newCells = setCellProp(cells, rowParam, colParam, "state", 2);
       setCells(newCells);
@@ -194,7 +190,7 @@ const Game = () => {
       return;
     }
 
-    // if flagged, unflag it
+
     const newCells = setCellProp(cells, rowParam, colParam, "state", 0);
     setCells(newCells);
     setMineCounter(mineCounter + 1);
@@ -229,7 +225,7 @@ const Game = () => {
   };
 
   const openMultiple = (cellsParam, rowParam, colParam) => {
-    // open current cell first
+
     let newCells = setCellProp(cellsParam, rowParam, colParam, "state", 1);
 
     const topLeftCell =
