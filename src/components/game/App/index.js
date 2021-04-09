@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import "./App.css";
 import NumberDisplay from "../NumberDisplay";
 import Button from "../Button";
 import generateCells from "../utils/generateCells";
 import setCellProp from "../utils/setCellProp";
+import styled from 'styled-components'
 
 const Game = () => {
   const [cells, setCells] = useState(generateCells());
@@ -325,19 +325,79 @@ const Game = () => {
   };
 
   return (
-    <div className="Game">
-      <div className="Header">
+    <App>
+      <Header>
         <NumberDisplay value={mineCounter} />
-        <div className="Face" onClick={handleFaceClick}>
+        <Face onClick={handleFaceClick}>
           <span role="img" aria-label="smiley">
             {face}
           </span>
-        </div>
+        </Face>
         <NumberDisplay value={time} />
-      </div>
-      <div className="Body">{renderRows()}</div>
-    </div>
+      </Header>
+      <Body>{renderRows()}</Body>
+    </App>
   );
 };
 
 export default Game;
+
+const App = styled.div `
+  background: #c2c2c2;
+  border-width: 4px;
+  border-style: solid;
+  border-right-color: #999;
+  border-bottom-color: #999;
+  border-top-color: white;
+  border-left-color: white;
+  padding: 16px;
+`
+
+const Header = styled.div `
+  background: #c0c0c0;
+  border-width: 4px;
+  border-style: solid;
+  border-top-color: #7b7b7b;
+  border-left-color: #7b7b7b;
+  border-right-color: white;
+  border-bottom-color: white;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const Face = styled.div `
+  width: 52px;
+  height: 52px;
+  border-width: 4px;
+  border-style: solid;
+  border-top-color: white;
+  border-left-color: white;
+  border-right-color: #7b7b7b;
+  border-bottom-color: #7b7b7b;
+  display: flex;
+  font-size: 35px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &.active {
+    border-top-color: #7b7b7b;
+    border-left-color: #7b7b7b;
+    border-right-color: white;
+    border-bottom-color: white;
+  }
+`
+
+const Body = styled.div `
+  margin-top: 16px;
+  border-width: 4px;
+  border-style: solid;
+  border-top-color: #7b7b7b;
+  border-left-color: #7b7b7b;
+  border-right-color: white;
+  border-bottom-color: white;
+  display: grid;
+  grid-template-rows: repeat(9, 1fr);
+  grid-template-columns: repeat(9, 1fr);
+`
