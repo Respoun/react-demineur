@@ -1,4 +1,4 @@
-# Graylog Alert dispacher
+#React-demineur
 
 Demineur game made with ReactJs
 
