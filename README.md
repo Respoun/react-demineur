@@ -17,5 +17,5 @@ npm start
 
 Deploy on Heroku:
 ```bash
-
+https://react-demineur.herokuapp.com/
 ```
