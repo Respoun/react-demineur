@@ -1,4 +1,4 @@
-#React-demineur
+# React-demineur
 
 Demineur game made with ReactJs
 
