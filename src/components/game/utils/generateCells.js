@@ -4,7 +4,7 @@ const generateCells = () => {
   for (let row = 0; row < 9; row++) {
     cells.push([]);
     for (let col = 0; col < 9; col++) {
-      cells[row].push({ bomb: false, state: 0 }); // 0 = unpressed, 1 = visible, 2 = flag
+      cells[row].push({ bomb: false, state: 0 });
     }
   }
 
@@ -22,7 +22,6 @@ const generateCells = () => {
     }
   }
 
-  // calculate the value of each cell
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
       const cell = cells[row][col];
@@ -31,7 +30,6 @@ const generateCells = () => {
         continue;
       }
 
-      // compute value;
       let counter = 0;
       if (row > 0 && col > 0 && cells[row - 1][col - 1].bomb) {
         counter++;
