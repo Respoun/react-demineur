@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Notif  from './components/utils/notif.js';
 import styled, { ThemeProvider } from 'styled-components'
 import Router from '../src/components/config/router'
 import { light, dark } from './components/config/theme'
 
 function App() {
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
 
   return (
-    <ThemeProvider theme={light}>
+    <ThemeProvider theme={theme === 'light' ? light : dark}>
+    <button onClick={toggleTheme}>Change theme</button>
       <General>
         <div className="App">
             <Router></Router>
